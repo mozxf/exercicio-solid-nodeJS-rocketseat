@@ -1,0 +1,254 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SOLID exercice API rocketseat.",
+    "description": "An exercice to practice solid OOP principle.",
+    "contact": {
+      "email": "nandogustavo2001@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a new User",
+        "description": "Receives a name and an email in request body and creates a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "f9d77df5-ab00-4ead-84cd-d2f1194aa25a"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Name"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "name@email.com"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2022-05-14T22:25:01.929Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2022-05-14T22:25:01.929Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email is already being used!"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "List all the users.",
+        "description": "If the user requesting is an admin, lists all the users",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "f9d77df5-ab00-4ead-84cd-d2f1194aa25a"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Name"
+                      },
+                      "admin": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "name@email.com"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2022-05-14T22:25:01.929Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2022-05-14T22:25:01.929Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User is not an admin! or User does not exist!"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Return data of a specific user",
+        "description": "Through an id passed by params, find the user and return it's data.",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "f9d77df5-ab00-4ead-84cd-d2f1194aa25a"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Name"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "name@email.com"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2022-05-14T22:25:01.929Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2022-05-14T22:25:01.929Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found!"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Turns an user into an admin",
+        "description": "Gets user id by route params and turns respective user into admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User became an admin!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "f9d77df5-ab00-4ead-84cd-d2f1194aa25a"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Name"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "email": {
+                      "type": " string",
+                      "example": "name@email.com"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2022-05-14T22:25:01.929Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2022-05-14T22:25:01.929Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  }
+}
