@@ -228,7 +228,7 @@
                       "example": true
                     },
                     "email": {
-                      "type": " string",
+                      "type": "string",
                       "example": "name@email.com"
                     },
                     "created_at": {
